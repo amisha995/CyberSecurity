@@ -1,0 +1,22 @@
+<Sysmon schemaversion="4.90">
+  <EventFiltering>
+    <ProcessCreate onmatch="exclude">
+      <Image condition="begin with">C:\Windows\System32\</Image>
+    </ProcessCreate>
+    <ProcessCreate onmatch="include">
+      <CommandLine condition="contains">-i</CommandLine>
+    </ProcessCreate>
+    <NetworkConnect onmatch="exclude">
+      <Image condition="begin with">C:\Windows\System32\</Image>
+    </NetworkConnect>
+    <ImageLoad onmatch="exclude">
+      <ImageLoaded condition="begin with">C:\Windows\System32\</ImageLoaded>
+    </ImageLoad>
+    <ImageLoad onmatch="include">
+      <ImageLoaded condition="end with">payload.exe</ImageLoaded>
+    </ImageLoad>
+    <FileCreate onmatch="include">
+      <TargetFilename condition="end with">payload.exe</TargetFilename>
+    </FileCreate>
+  </EventFiltering>
+</Sysmon>
